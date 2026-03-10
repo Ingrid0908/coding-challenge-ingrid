@@ -6,7 +6,7 @@ The code must be developed by the candidate. Tools for generating code cannot re
 
 ## System Requirements
 
-To complete this exercise, the candidate must have access to a computer with at least 8 GB of RAM and with Docker and Docker Compose installed. It is recommended to install [Docker Desktop](https://docs.docker.com/desktop/setup/install/). If the candidate has no prior experience with these tools, the exercise may take approximately four hours to complete.
+To complete this exercise, the candidate must have access to a computer with at least 8 GB of RAM and with Docker and Docker Compose installed. It is recommended to install [Docker Desktop](https://docs.docker.com/desktop/setup/install/). 
 
 ## Coding Exercise
 
