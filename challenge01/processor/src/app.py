@@ -96,10 +96,6 @@ def proccess_documents(document: Dict[str, Any]) -> List[Dict[str, Any]]:
     if not doc_id or not description:
         raise ValueError("Document must contain at least 'id' and 'description'")
 
-    chunks = split_into_chunks(description)
-    result = []
-
-
     title = document.get("title", "")
     authors = document.get("authors",[])
     first_publish_year = document.get("first_publish_year",0)
@@ -110,6 +106,10 @@ def proccess_documents(document: Dict[str, Any]) -> List[Dict[str, Any]]:
     description = filterReplaceNonASCII(description)
     subjects = [ subject.capitalize() for subject in subjects ]
 
+    chunks = split_into_chunks(description)
+    result = []
+
+
     for idx, chunk in enumerate(chunks):
         embedding = generate_embedding(chunk)
         result.append({
@@ -117,7 +117,7 @@ def proccess_documents(document: Dict[str, Any]) -> List[Dict[str, Any]]:
             "chunk_id": f"{doc_id}-{idx}",
             "title": title,
             "description": chunk,
-            "autors": authors,
+            "authors": authors,
             "first_publish_year": first_publish_year,
             "subjects": subjects,
             "language": language,
