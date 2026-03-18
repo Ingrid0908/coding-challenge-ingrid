@@ -74,7 +74,6 @@ def split_into_chunks(text: str, max_sentences: int = 5) -> List[str]:
 
 def generate_embedding(text: str) -> List[float]:
     # TODO: Create the required code to generate text embeddings. DONE<=====
-    
     return model.encode(text).tolist()
 
 def filterReplaceNonASCII(text: str) -> str:
@@ -142,8 +141,8 @@ def index_documents(es: Elasticsearch, index_name: str, docs: List[Dict[str, Any
 
     success, errors = bulk(es,actions, raise_on_error= False)
 
+    print(f"Succesfully indexing {success} docs")
     if errors:
-        print(f"Succesfully indexing {success} docs")
         print(f"Some docs failed when indexing: ")
         for error in errors:
             print(f"Error: {error}")
@@ -162,7 +161,7 @@ def semantic_search(es: Elasticsearch, index_name: str, query_text: str, k: int 
             "k": k,
             "num_candidates": 10
         },
-        "_source": ["doc_id", "chunk_id", "title", "description"]
+        "_source": ["doc_id", "chunk_id", "title", "description"] 
     }
 
     return es.search(index=index_name, body=body)
@@ -181,11 +180,11 @@ def main() -> None:
         built_docs = proccess_documents(document)
         index_documents(es, INDEX_NAME, built_docs)
 
-    print("Semantic search: examples")
+    print("Semantic search: ")
 
     # TODO: Create several semantic search queries and print the results. Done<===
     # Use the function semantic_search() Done<===
-    queries = [
+    queries = [      
         "A story about a murder",
         "A kids story about learning",
         "A historical drama story",
@@ -195,7 +194,9 @@ def main() -> None:
         "A fantasy tale with dragons and magic",
         "A thriller about political corruption",
         "A children's bedtime story with animals",
-        "A futuristic dystopian society story"
+        "A futuristic dystopian society story",
+        "Is there any story about the son of a king",
+        "Une histoire symbolique sur la vie vue par un enfant"
     ]
 
     for q in queries:
